@@ -10,4 +10,11 @@ export class ProductCardComponent {
   name = 'A 產品';
   author = '作者甲、作者乙、作者丙';
   company = '博碩文化';
+
+  detail(): void {
+    console.log('detail');
+  }
+  add(): void {
+    console.log('add');
+  }
 }
