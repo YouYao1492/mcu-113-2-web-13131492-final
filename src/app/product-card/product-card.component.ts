@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
+  @Input({ required: true })
+  id!: string;
+
   @Input()
   productName!: string;
 

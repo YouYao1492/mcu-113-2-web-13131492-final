@@ -8,7 +8,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  productName = 'A 產品';
+  productName = '產品';
   author = '作者甲、作者乙、作者丙';
   company = '博碩文化';
 
