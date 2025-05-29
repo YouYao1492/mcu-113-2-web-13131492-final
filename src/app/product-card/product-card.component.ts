@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, Input, numberAttribute } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
@@ -21,6 +22,9 @@ export class ProductCardComponent {
 
   @Input()
   photoUrl!: string;
+
+  @Input({ transform: numberAttribute })
+  price!: number;
 
   detail(): void {
     console.log('detail');
