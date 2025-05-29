@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-product-card-list',
@@ -8,13 +9,16 @@ import { ProductCardComponent } from '../product-card/product-card.component';
   styleUrl: './product-card-list.component.scss',
 })
 export class ProductCardListComponent {
-  productName = '產品';
-  author = '作者甲、作者乙、作者丙';
-  company = '博碩文化';
+  product = new Product({
+    id: 'A',
+    name: '產品',
+    authors: '作者甲、作者乙、作者丙',
+    company: '博碩文化',
 
-  photoUrl = 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img';
+    photoUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
 
-  price = 1580;
+    price: 1580,
+  });
 
   detail(): void {
     console.log('detail');
