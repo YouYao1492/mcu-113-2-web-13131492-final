@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ProductCardListComponent } from './product-card-list/product-card-list.component';
 import { Product } from './models/product';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ProductCardListComponent],
+  imports: [ProductCardListComponent, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
