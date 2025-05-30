@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
+
+  a {
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #005cbb;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:active,
+    &force {
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: #005cbb33;
+    }
+  }
+}
