@@ -22,10 +22,8 @@ export class ProductCardComponent {
 
   readonly view = output<void>();
 
+  readonly add = output<void>();
+
   @HostBinding('class')
   class = 'app-product-card';
-
-  add(): void {
-    console.log('add');
-  }
 }
