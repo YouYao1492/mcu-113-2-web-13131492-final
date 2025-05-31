@@ -28,6 +28,7 @@ export class ProductDetailPageComponent implements OnInit {
   }
 
   onAdd(): void {
-    console.log('add');
+    console.log(this.product);
+    // this.router.navigate(['products']);
   }
 }
