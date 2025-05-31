@@ -1,7 +1,6 @@
-import { Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, startWith, Subject, switchMap } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
 import { PaginationComponent } from './../pagination/pagination.component';
@@ -18,31 +17,26 @@ export class ProductPageComponent {
 
   private productService = inject(ProductService);
 
-  private readonly pageIndex$ = new BehaviorSubject(1);
-  get pageIndex() {
-    return this.pageIndex$.value;
-  }
-  set pageIndex(value: number) {
-    this.pageIndex$.next(value);
-  }
+  readonly pageIndex = signal(1);
 
-  private readonly refresh$ = new Subject<void>();
+  readonly pageSize = signal(5);
 
-  pageSize = 5;
-
-  private readonly data$ = combineLatest([this.pageIndex$, this.refresh$.pipe(startWith(undefined))]).pipe(
-    switchMap(() => this.productService.getList(undefined, this.pageIndex, this.pageSize))
-  );
-
-  private readonly data = toSignal(this.data$, { initialValue: { data: [], count: 0 } });
+  private readonly data = rxResource({
+    request: () => ({ pageIndex: this.pageIndex(), pageSize: this.pageSize() }),
+    defaultValue: { data: [], count: 0 },
+    loader: ({ request }) => {
+      const { pageIndex, pageSize } = request;
+      return this.productService.getList(undefined, pageIndex, pageSize);
+    },
+  });
 
   readonly totalCount = computed(() => {
-    const { count } = this.data();
+    const { count } = this.data.value();
     return count;
   });
 
   readonly products = computed(() => {
-    const { data } = this.data();
+    const { data } = this.data.value();
     return data;
   });
 
