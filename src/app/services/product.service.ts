@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { enableDebugTools } from '@angular/platform-browser';
-import { delay, filter, map, mergeMap, Observable, of, toArray } from 'rxjs';
+import { delay, filter, map, mergeMap, Observable, of, tap, toArray } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ export class ProductService {
   private _data: Product[] = [
     new Product({
       id: 'A',
-      name: '產品',
+      name: '品',
       authors: ['作者甲', '作者乙', '作者丙'],
       company: '博碩文化',
       photoUrl: 'https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img',
