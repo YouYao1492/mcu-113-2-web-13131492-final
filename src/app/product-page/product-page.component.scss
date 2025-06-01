@@ -1,4 +1,26 @@
 :host {
   display: block;
   padding: 20px;
+
+  .toolbar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+  }
+
+  button {
+    background-color: transparent;
+    border: 1px solid #007bff;
+    color: #007bff;
+    font-size: 15px;
+  }
+
+  input[type='text'] {
+    padding: 5px;
+    width: 200px;
+    height: 25px;
+    font-size: 15px;
+    border: 1px solid #007bff;
+  }
 }
