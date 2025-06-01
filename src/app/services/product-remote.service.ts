@@ -13,7 +13,9 @@ export class ProductRemoteService extends ProductService {
   private readonly httpClient = inject(HttpClient);
 
   override getList(name: string | undefined, index: number, size: number): Observable<{ data: Product[]; count: number }> {
-    const params = new HttpParams({ fromObject: { _page: index, _per_page: size, isShow: true } });
+    let queryString = { _page: index, _per_page: size, isShow: true } as { name?: string; _page: number; _per_page: number };
+    if (name) queryString = { ...queryString, name };
+    const params = new HttpParams({ fromObject: queryString });
 
     return this.httpClient
       .get<{ data: Product[]; items: number }>(this.url, { params })

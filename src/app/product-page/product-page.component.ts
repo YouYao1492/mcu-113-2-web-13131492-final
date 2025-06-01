@@ -1,5 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { rxResource, takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
@@ -8,7 +9,7 @@ import { ProductService } from './../services/product.service';
 
 @Component({
   selector: 'app-product-page',
-  imports: [PaginationComponent, ProductCardListComponent],
+  imports: [ReactiveFormsModule, PaginationComponent, ProductCardListComponent],
   templateUrl: './product-page.component.html',
   styleUrl: './product-page.component.scss',
 })
@@ -17,16 +18,20 @@ export class ProductPageComponent {
 
   private productService = inject(ProductService);
 
+  readonly searchControl = new FormControl<string | undefined>(undefined, { nonNullable: true });
+
+  readonly searchValue = signal('');
+
   readonly pageIndex = signal(1);
 
   readonly pageSize = signal(5);
 
   private readonly data = rxResource({
-    request: () => ({ pageIndex: this.pageIndex(), pageSize: this.pageSize() }),
+    request: () => ({ name: this.searchValue(), pageIndex: this.pageIndex(), pageSize: this.pageSize() }),
     defaultValue: { data: [], count: 0 },
     loader: ({ request }) => {
-      const { pageIndex, pageSize } = request;
-      return this.productService.getList(undefined, pageIndex, pageSize);
+      const { name, pageIndex, pageSize } = request;
+      return this.productService.getList(name, pageIndex, pageSize);
     },
   });
 
@@ -47,7 +52,8 @@ export class ProductPageComponent {
   onAdd(product: Product): void {
     console.log(product);
   }
-}
-function compute(arg0: () => any) {
-  throw new Error('Function not implemented.');
+
+  onSearch(): void {
+    this.searchValue.set(this.searchControl.value ?? '');
+  }
 }
