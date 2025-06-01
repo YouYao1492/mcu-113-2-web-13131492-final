@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from './../models/product';
 import { ProductService } from './product.service';
 
@@ -18,5 +18,10 @@ export class ProductRemoteService extends ProductService {
     return this.httpClient
       .get<{ data: Product[]; items: number }>(this.url, { params })
       .pipe(map(({ data, items: count }) => ({ data, count })));
+  }
+
+  override getById(productId: string): Observable<Product> {
+    const url = `${this.url}/${productId}`;
+    return this.httpClient.get<Product>(url);
   }
 }
