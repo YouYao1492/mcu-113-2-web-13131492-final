@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map, Observable, filter } from 'rxjs';
 import { Product } from './../models/product';
 import { ProductService } from './product.service';
 
@@ -13,7 +13,7 @@ export class ProductRemoteService extends ProductService {
   private readonly httpClient = inject(HttpClient);
 
   override getList(name: string | undefined, index: number, size: number): Observable<{ data: Product[]; count: number }> {
-    const params = new HttpParams({ fromObject: { _page: index, _per_page: size } });
+    const params = new HttpParams({ fromObject: { _page: index, _per_page: size, isShow: true } });
 
     return this.httpClient
       .get<{ data: Product[]; items: number }>(this.url, { params })
