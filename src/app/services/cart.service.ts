@@ -19,13 +19,11 @@ export class CartService {
 
   onAdd(product: Product): void {
     const currentItems = this._cartItems();
-    const existingItems = currentItems.find((item) => item.product.id === product.id);
+    const existingItem = currentItems.find((item) => item.product.id === product.id);
 
-    if (existingItems) {
-      console.log('true');
+    if (existingItem) {
       this._cartItems.set(currentItems.map((item) => (item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)));
     } else {
-      console.log('false');
       this._cartItems.set([...currentItems, { product, quantity: 1 }]);
     }
   }
