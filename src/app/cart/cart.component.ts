@@ -10,11 +10,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  private CartService = inject(CartService);
+  public cartService = inject(CartService);
 
-  readonly cartItems = this.CartService.getList();
+  readonly cartItems = this.cartService.getList();
 
-  readonly total = this.CartService.getTotal();
+  readonly items = this.cartService.cartItems;
 
   form = new FormGroup({
     name: new FormControl<string | null>(null),
@@ -23,6 +23,6 @@ export class CartComponent {
   });
 
   onRemove(productID: string): void {
-    this.CartService.onRemove(productID);
+    this.cartService.onRemove(productID);
   }
 }

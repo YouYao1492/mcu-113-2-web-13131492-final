@@ -1,4 +1,3 @@
-import { map } from 'rxjs';
 import { Injectable, signal } from '@angular/core';
 import { Product } from './../models/product';
 
@@ -12,6 +11,8 @@ export interface CartItem {
 })
 export class CartService {
   private readonly _cartItems = signal<CartItem[]>([]);
+
+  public readonly cartItems = this._cartItems;
 
   getList() {
     return this._cartItems;
@@ -31,6 +32,7 @@ export class CartService {
   onRemove(productId: string): void {
     const currentItems = this._cartItems();
     this._cartItems.set(currentItems.filter((item) => item.product.id !== productId));
+    this.getTotal();
   }
 
   getTotal(): number {

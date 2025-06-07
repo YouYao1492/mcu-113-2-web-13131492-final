@@ -21,17 +21,22 @@
     <div class="product">
       <h3>購買項目</h3>
       <div>
-        1 產品
-        <input type="text" />
-        1850
-        <button type="button">刪除</button>
+        @for (item of items(); track $index) {
+        <div class="cart-item">
+          <span>{{ item.product.id }}</span>
+          <span>{{ item.product.name }}</span>
+          <input type="text" />
+          <span>{{ (item.product.price*item.quantity) | currency:'$':'symbol':'4.2'}}</span>
+          <button type="button" (click)="onRemove(item.product.id)">刪除</button>
+        </div>
+        }
       </div>
     </div>
   </div>
 </div>
 
 <div class="button">
-  <button type="button">送出訂單 {{ total | currency:'$':'symbol':'4.2'}}</button>
+  <button type="button">送出訂單 {{ cartService.getTotal() | currency:'$':'symbol':'4.2'}}</button>
 </div>
 
 <pre>{{ form.value |json }}</pre>
