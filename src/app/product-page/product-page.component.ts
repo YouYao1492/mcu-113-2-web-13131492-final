@@ -6,6 +6,7 @@ import { Product } from '../models/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
 import { PaginationComponent } from './../pagination/pagination.component';
 import { ProductService } from './../services/product.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-page',
@@ -17,6 +18,8 @@ export class ProductPageComponent {
   private router = inject(Router);
 
   private productService = inject(ProductService);
+
+  private cartService = inject(CartService);
 
   readonly searchControl = new FormControl<string | undefined>(undefined, { nonNullable: true });
 
@@ -50,7 +53,7 @@ export class ProductPageComponent {
   }
 
   onAdd(product: Product): void {
-    console.log(product);
+    this.cartService.onAdd(product);
   }
 
   onSearch(): void {

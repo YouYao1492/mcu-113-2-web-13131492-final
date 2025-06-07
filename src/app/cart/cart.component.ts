@@ -1,5 +1,6 @@
+import { CartService } from './../services/cart.service';
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -9,9 +10,19 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
+  private CartService = inject(CartService);
+
+  readonly cartItems = this.CartService.getList();
+
+  readonly total = this.CartService.getTotal();
+
   form = new FormGroup({
     name: new FormControl<string | null>(null),
     address: new FormControl<string | null>(null),
     phone: new FormControl<string | null>(null),
   });
+
+  onRemove(productID: string): void {
+    this.CartService.onRemove(productID);
+  }
 }

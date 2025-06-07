@@ -1,0 +1,47 @@
+import { map } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { Product } from './../models/product';
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CartService {
+  private readonly _cartItems = signal<CartItem[]>([]);
+
+  getList() {
+    return this._cartItems;
+  }
+
+  onAdd(product: Product): void {
+    const currentItems = this._cartItems();
+    const existingItems = currentItems.find((item) => item.product.id === product.id);
+
+    if (existingItems) {
+      console.log('true');
+      this._cartItems.set(currentItems.map((item) => (item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item)));
+    } else {
+      console.log('false');
+      this._cartItems.set([...currentItems, { product, quantity: 1 }]);
+    }
+  }
+
+  onRemove(productId: string): void {
+    const currentItems = this._cartItems();
+    this._cartItems.set(currentItems.filter((item) => item.product.id !== productId));
+  }
+
+  getTotal(): number {
+    let result = 0;
+    const items = this._cartItems();
+    for (let index = 0; index < this._cartItems.length; index++) {
+      const item = items[index];
+      result += item.product.price * item.quantity;
+    }
+    return result;
+  }
+}
