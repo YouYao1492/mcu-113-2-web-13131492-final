@@ -1,11 +1,11 @@
 import { CartService } from './../services/cart.service';
-import { JsonPipe } from '@angular/common';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
-  imports: [JsonPipe, ReactiveFormsModule],
+  imports: [JsonPipe, CurrencyPipe, ReactiveFormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })

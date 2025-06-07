@@ -36,9 +36,10 @@ export class CartService {
   getTotal(): number {
     let result = 0;
     const items = this._cartItems();
-    for (let index = 0; index < this._cartItems.length; index++) {
-      const item = items[index];
-      result += item.product.price * item.quantity;
+
+    for (let index = 0; index < items.length; index++) {
+      const element = items[index];
+      result += element.quantity * element.product.price;
     }
     return result;
   }

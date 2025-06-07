@@ -31,7 +31,7 @@
 </div>
 
 <div class="button">
-  <button type="button">送出訂單 {{ total }}</button>
+  <button type="button">送出訂單 {{ total | currency:'$':'symbol':'4.2'}}</button>
 </div>
 
 <pre>{{ form.value |json }}</pre>
@@ -39,7 +39,6 @@
 @for (item of cartItems(); track $index) {
 <div class="cart-item">
   <span>{{ item.product.id }}</span>
-  <span>quantity: {{ item.quantity }}</span>
 </div>
 
 <button type="button" (click)="onRemove(item.product.id)">remove</button>
