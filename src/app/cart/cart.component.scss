@@ -29,18 +29,33 @@
   .items {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
     width: 70%;
 
-    .product {
+    .cart {
+      border: 1px solid #ccc;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
 
-      button {
-        background-color: transparent;
-        color: red;
-        border: 1px solid red;
+      .cart-list {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #ccc;
+        align-items: center;
+
+        .cart-item {
+          margin: 10px auto;
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+
+          button {
+            background-color: transparent;
+            color: red;
+            border: 1px solid red;
+            cursor: pointer;
+          }
+        }
       }
     }
   }
@@ -52,8 +67,15 @@
   align-content: center;
 
   button {
-    background-color: transparent;
-    color: #ccc;
+    background-color: #007bff;
+    color: white;
     border: 1px solid #ccc;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #ccc;
+      color: #999;
+      cursor: not-allowed;
+    }
   }
 }

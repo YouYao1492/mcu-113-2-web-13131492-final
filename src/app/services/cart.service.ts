@@ -15,7 +15,7 @@ export class CartService {
   public readonly cartItems = this._cartItems;
 
   getList() {
-    return this._cartItems;
+    return this._cartItems();
   }
 
   onAdd(product: Product): void {

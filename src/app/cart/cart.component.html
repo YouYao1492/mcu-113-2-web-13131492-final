@@ -5,29 +5,38 @@
       <div class="form-column">
         <label>姓名</label>
         <input type="text" formControlName="name" />
+        @if (name.hasError('required')) {
+        <div class="error-message">請輸入姓名</div>
+        }
       </div>
       <div class="form-column">
         <label>地址</label>
         <input type="text" formControlName="address" />
+        @if (address.hasError('required')) {
+        <div class="error-message">請輸入地址</div>
+        }
       </div>
       <div class="form-column">
         <label>電話</label>
         <input type="text" formControlName="phone" />
+        @if (phone.hasError('required')) {
+        <div class="error-message">請輸入電話</div>
+        }
       </div>
     </div>
   </div>
 
   <div class="items">
-    <div class="product">
+    <div class="cart">
       <h3>購買項目</h3>
-      <div>
-        @for (item of items(); track $index) {
+      <div class="cart-list">
+        @for (item of cartItems(); track $index) {
         <div class="cart-item">
-          <span>{{ item.product.id }}</span>
-          <span>{{ item.product.name }}</span>
-          <input type="text" />
-          <span>{{ (item.product.price*item.quantity) | currency:'$':'symbol':'4.2'}}</span>
-          <button type="button" (click)="onRemove(item.product.id)">刪除</button>
+          <div>{{ item.product.id }}</div>
+          <div>{{ item.product.name }}</div>
+          <input type="text" [(value)]="item.quantity" />
+          <div>{{ (item.product.price*item.quantity) | currency:'$':'symbol':'4.2'}}</div>
+          <button type="number" (click)="onRemove(item.product.id)">刪除</button>
         </div>
         }
       </div>
@@ -36,15 +45,8 @@
 </div>
 
 <div class="button">
-  <button type="button">送出訂單 {{ cartService.getTotal() | currency:'$':'symbol':'4.2'}}</button>
+  <button type="button" [disabled]="form.invalid" (click)="onSubmit()">送出訂單 {{ getTotal() | currency:'$':'symbol':'4.2'}}</button>
 </div>
 
 <pre>{{ form.value |json }}</pre>
-
-@for (item of cartItems(); track $index) {
-<div class="cart-item">
-  <span>{{ item.product.id }}</span>
-</div>
-
-<button type="button" (click)="onRemove(item.product.id)">remove</button>
-}
+<pre>{{ cartItems | json }}</pre>
