@@ -34,9 +34,9 @@
         <div class="cart-item">
           <div>{{ item.product.id }}</div>
           <div>{{ item.product.name }}</div>
-          <input type="text" [(value)]="item.quantity" />
-          <div>{{ (item.product.price*item.quantity) | currency:'$':'symbol':'4.2'}}</div>
-          <button type="number" (click)="onRemove(item.product.id)">刪除</button>
+          <input type="text" [value]="item.quantity" />
+          <div>{{ item.product.price| currency:'$':'symbol':'4.2'}}</div>
+          <button type="button" (click)="onRemove(item.product.id)">刪除</button>
         </div>
         }
       </div>

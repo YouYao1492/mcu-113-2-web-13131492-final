@@ -1,7 +1,7 @@
-import { CartService } from './../services/cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
-import { Component, computed, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CartService } from './../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   public cartService = inject(CartService);
 
   readonly cartItems = this.cartService.cartItems;
@@ -20,6 +20,7 @@ export class CartComponent {
     name: new FormControl<string | null>(null, { validators: [Validators.required] }),
     address: new FormControl<string | null>(null, { validators: [Validators.required] }),
     phone: new FormControl<string | null>(null, { validators: [Validators.required] }),
+    cart: new FormArray<FormGroup<any>>([], { validators: [Validators.required] }),
   });
 
   get name(): FormControl<string | null> {
@@ -32,6 +33,25 @@ export class CartComponent {
 
   get phone(): FormControl<string | null> {
     return this.form.get('phone') as FormControl<string | null>;
+  }
+
+  get cart(): FormArray<FormGroup<any>> {
+    return this.form.get('cart') as FormArray<FormGroup<any>>;
+  }
+
+  ngOnInit(): void {
+    const items = this.cartItems();
+    for (let index = 0; index < items.length; index++) {
+      const element = items[index];
+      const cartItemGroup = new FormGroup({
+        productId: new FormControl<string | null>(element.product.id),
+        productName: new FormControl<string | null>(element.product.name),
+        quantity: new FormControl<number | null>(element.quantity),
+        productPrice: new FormControl<number | null>(element.product.price),
+      });
+
+      this.cart.push(cartItemGroup);
+    }
   }
 
   onRemove(productId: string): void {

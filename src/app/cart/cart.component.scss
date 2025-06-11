@@ -22,6 +22,10 @@
         display: flex;
         margin-bottom: 10px;
         justify-content: space-around;
+
+        .error-message {
+          color: red;
+        }
       }
     }
   }
@@ -44,9 +48,10 @@
         align-items: center;
 
         .cart-item {
-          margin: 10px auto;
           display: flex;
           flex-direction: row;
+          margin: 10px auto;
+          justify-content: space-around;
           gap: 10px;
 
           button {
