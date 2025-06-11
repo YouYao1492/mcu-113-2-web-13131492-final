@@ -31,16 +31,16 @@
     {
       "id": "a8a1",
       "name": "C 產品",
+      "company": "博碩文化",
       "authors": [
         "作者甲",
-        "作者乙",
+        "asdf",
         "作者丙"
       ],
-      "company": "博碩文化",
+      "price": 1850,
       "isShow": true,
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
-      "createDate": "2023-10-17T00:00:00.000+08:00",
-      "price": 1850
+      "createDate": "2025-06-11T15:23:18.403Z"
     },
     {
       "id": "7059",
@@ -111,6 +111,34 @@
       "photoUrl": "https://api.fnkr.net/testimg/200x200/DDDDDD/999999/?text=img",
       "createDate": "2023-10-17T00:00:00.000+08:00",
       "price": 10000
+    }
+  ],
+  "orders": [
+    {
+      "id": "3b23",
+      "name": "aaa",
+      "address": "123",
+      "phone": "000000000",
+      "cart": [
+        {
+          "productId": "2",
+          "productName": "B 產品",
+          "quantity": 4,
+          "productPrice": 1850
+        },
+        {
+          "productId": "a8a1",
+          "productName": "C 產品",
+          "quantity": 2,
+          "productPrice": 1850
+        },
+        {
+          "productId": "7059",
+          "productName": "D 產品",
+          "quantity": 1,
+          "productPrice": 1850
+        }
+      ]
     }
   ]
 }

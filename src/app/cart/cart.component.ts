@@ -2,6 +2,7 @@ import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from './../services/cart.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -11,6 +12,8 @@ import { CartService } from './../services/cart.service';
 })
 export class CartComponent implements OnInit {
   public cartService = inject(CartService);
+
+  private readonly HttpClient = inject(HttpClient);
 
   readonly cartItems = this.cartService.cartItems;
 
@@ -58,13 +61,13 @@ export class CartComponent implements OnInit {
     this.cartService.onRemove(productId);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     const order = {
       name: this.name.value,
       address: this.address.value,
       phone: this.phone.value,
-      items: this.cartItems(),
+      cart: this.cart.value,
     };
-    console.log(order);
+    this.HttpClient.post('http://localhost:3000/orders', order).subscribe();
   }
 }
