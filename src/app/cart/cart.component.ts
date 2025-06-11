@@ -1,6 +1,6 @@
 import { CartService } from './../services/cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,8 @@ export class CartComponent {
   public cartService = inject(CartService);
 
   readonly cartItems = this.cartService.cartItems;
+
+  readonly total = this.cartService.total;
 
   form = new FormGroup({
     name: new FormControl<string | null>(null, { validators: [Validators.required] }),
@@ -34,10 +36,6 @@ export class CartComponent {
 
   onRemove(productID: string): void {
     this.cartService.onRemove(productID);
-  }
-
-  getTotal(): number {
-    return this.cartService.getTotal();
   }
 
   onSubmit() {

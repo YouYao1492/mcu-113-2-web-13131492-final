@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Product } from './../models/product';
+import { computeMsgId } from '@angular/compiler';
 
 export interface CartItem {
   product: Product;
@@ -13,6 +14,8 @@ export class CartService {
   private readonly _cartItems = signal<CartItem[]>([]);
 
   public readonly cartItems = this._cartItems;
+
+  // readonly total = signal<number>(0);
 
   getList() {
     return this._cartItems();
@@ -32,10 +35,9 @@ export class CartService {
   onRemove(productId: string): void {
     const currentItems = this._cartItems();
     this._cartItems.set(currentItems.filter((item) => item.product.id !== productId));
-    this.getTotal();
   }
 
-  getTotal(): number {
+  readonly total = computed(() => {
     let result = 0;
     const items = this._cartItems();
 
@@ -44,5 +46,5 @@ export class CartService {
       result += element.quantity * element.product.price;
     }
     return result;
-  }
+  });
 }
