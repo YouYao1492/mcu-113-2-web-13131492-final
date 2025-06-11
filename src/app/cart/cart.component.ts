@@ -34,8 +34,8 @@ export class CartComponent {
     return this.form.get('phone') as FormControl<string | null>;
   }
 
-  onRemove(productID: string): void {
-    this.cartService.onRemove(productID);
+  onRemove(productId: string): void {
+    this.cartService.onRemove(productId);
   }
 
   onSubmit() {

@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 import { computed, Injectable, signal } from '@angular/core';
 import { Product } from './../models/product';
 import { computeMsgId } from '@angular/compiler';
@@ -40,7 +41,23 @@ export class CartService {
   }
 
   onRemove(productId: string): void {
-    const currentItems = this.cartItems();
-    this.cartItems.set(currentItems.filter((item) => item.product.id !== productId));
+    this.cartItems.update((items) =>
+      items
+        .map((item) => (item.product.id === productId ? { ...item, quantity: item.quantity - 1 } : item))
+        .filter((item) => item.quantity > 0)
+    );
   }
+
+  // onRemove(productId: string): void {
+  //   this.cartItems.update(
+  //     (items) =>
+  //       items
+  //         .map((item) =>
+  //           item.product.id === productId
+  //             ? { ...item, quantity: item.quantity - 1 } // Example: decrement quantity
+  //             : item
+  //         )
+  //         .filter((item) => item.quantity > 0) // Remove items with zero quantity
+  //   );
+  // }
 }
