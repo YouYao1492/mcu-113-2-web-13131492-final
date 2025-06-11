@@ -32,11 +32,15 @@
       <div class="cart-list">
         @for (item of cartItems(); track $index) {
         <div class="cart-item">
-          <div>{{ item.product.id }}</div>
-          <div>{{ item.product.name }}</div>
-          <input type="text" [value]="item.quantity" />
-          <div>{{ item.product.price| currency:'$':'symbol':'4.2'}}</div>
-          <button type="button" (click)="onRemove(item.product.id)">刪除</button>
+          <div class="asdgasdl">
+            <div>{{ item.product.id }}</div>
+            <div>{{ item.product.name }}</div>
+          </div>
+          <div class="asdfjnekj">
+            <input type="text" [value]="item.quantity" />
+            <div>{{ item.product.price| currency:'$':'symbol':'4.2'}}</div>
+            <button type="button" (click)="onRemove(item.product.id)">刪除</button>
+          </div>
         </div>
         }
       </div>
@@ -45,7 +49,7 @@
 </div>
 
 <div class="button">
-  <button type="button" [disabled]="form.invalid" (click)="onSubmit()">送出訂單 {{ total() | currency:'$':'symbol':'4.2'}}</button>
+  <button type="button" [disabled]="form.invalid" (click)="onSubmit()">送出訂單 ({{ total() | currency:'$':'symbol':'4.2'}})</button>
 </div>
 
 <pre>{{ form.value |json }}</pre>
