@@ -5,7 +5,7 @@
   text-align: center;
   gap: 50px;
 
-  .info {
+  .buyer-info {
     width: 30%;
 
     h3 {
@@ -33,65 +33,62 @@
 
         > input {
           flex-grow: 1;
+          height: 20px;
           margin: auto 10px;
         }
       }
     }
   }
 
-  .items {
+  .cart {
     display: flex;
     flex-direction: column;
     width: 70%;
+
     h3 {
       border: 1px solid #ccc;
       margin: 0;
       padding: 10px;
     }
-    .cart {
+
+    .cart-list {
       border: 1px solid #ccc;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+      align-items: center;
 
-      .cart-list {
-        border: 1px solid #ccc;
-        align-items: center;
+      .cart-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 10px auto;
+        gap: 10px;
 
-        .cart-item {
+        button {
+          background-color: transparent;
+          color: red;
+          border: 1px solid red;
+          cursor: pointer;
+        }
+
+        input {
+          text-align: center;
+          width: 100px;
+          height: 20px;
+        }
+
+        .item-info {
           display: flex;
           flex-direction: row;
-          justify-content: space-between;
-          margin: 10px auto;
-          gap: 10px;
+          align-items: center;
+          gap: 50px;
+          margin: auto 40px;
+        }
 
-          button {
-            background-color: transparent;
-            color: red;
-            border: 1px solid red;
-            cursor: pointer;
-          }
-
-          input {
-            text-align: center;
-            width: 100px;
-          }
-
-          .asdgasdl {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 50px;
-            margin: auto 40px;
-          }
-
-          .asdfjnekj {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 30px;
-            margin: auto 40px;
-          }
+        .item-details {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 30px;
+          margin: auto 40px;
         }
       }
     }

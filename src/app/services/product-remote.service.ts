@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable, filter } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from './../models/product';
 import { ProductService } from './product.service';
 

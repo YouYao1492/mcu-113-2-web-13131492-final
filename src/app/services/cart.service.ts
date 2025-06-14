@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Product } from './../models/product';
-import { computeMsgId } from '@angular/compiler';
 
 export interface CartItem {
   product: Product;

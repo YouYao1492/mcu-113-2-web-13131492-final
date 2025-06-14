@@ -1,12 +1,12 @@
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { rxResource, takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductCardListComponent } from '../product-card-list/product-card-list.component';
+import { CartService } from '../services/cart.service';
 import { PaginationComponent } from './../pagination/pagination.component';
 import { ProductService } from './../services/product.service';
-import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-page',

@@ -1,12 +1,12 @@
-import { CurrencyPipe, JsonPipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CartService } from './../services/cart.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
-  imports: [JsonPipe, CurrencyPipe, ReactiveFormsModule],
+  imports: [CurrencyPipe, ReactiveFormsModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })

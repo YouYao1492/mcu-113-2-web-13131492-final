@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
+import { delay, filter, map, mergeMap, Observable, of, toArray } from 'rxjs';
 import { Product } from '../models/product';
-import { enableDebugTools } from '@angular/platform-browser';
-import { delay, filter, map, mergeMap, Observable, of, tap, toArray } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
