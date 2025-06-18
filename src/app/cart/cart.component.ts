@@ -45,12 +45,12 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     const items = this.cartItems();
     for (let index = 0; index < items.length; index++) {
-      const element = items[index];
+      const product = items[index];
       const cartItemGroup = new FormGroup({
-        productId: new FormControl<string | null>(element.product.id),
-        productName: new FormControl<string | null>(element.product.name),
-        quantity: new FormControl<number | null>(element.quantity),
-        productPrice: new FormControl<number | null>(element.product.price),
+        productId: new FormControl<string | null>(product.product.id),
+        productName: new FormControl<string | null>(product.product.name),
+        quantity: new FormControl<number | null>(product.quantity),
+        productPrice: new FormControl<number | null>(product.product.price),
       });
 
       this.cart.push(cartItemGroup);

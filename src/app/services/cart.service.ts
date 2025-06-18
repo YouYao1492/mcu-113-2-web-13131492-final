@@ -21,8 +21,8 @@ export class CartService {
     const items = this.cartItems();
 
     for (let index = 0; index < items.length; index++) {
-      const element = items[index];
-      result += element.quantity * element.product.price;
+      const product = items[index];
+      result += product.quantity * product.product.price;
     }
     return result;
   });

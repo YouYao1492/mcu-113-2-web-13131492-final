@@ -18,8 +18,6 @@ export class ProductDetailPageComponent {
 
   readonly cartService = inject(CartService);
 
-  private ProductService = inject(ProductService);
-
   onBack(): void {
     this.router.navigate(['products']);
   }
