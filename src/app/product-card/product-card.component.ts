@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, HostBinding, input, numberAttribute, output } from '@angular/core';
+import { booleanAttribute, Component, HostBinding, input, numberAttribute, output } from '@angular/core';
 
 @Component({
   selector: 'app-product-card',
@@ -15,6 +15,8 @@ export class ProductCardComponent {
   readonly authors = input<string[]>();
 
   readonly company = input<string>();
+
+  readonly isDiscount = input.required<boolean, string | boolean>({ transform: booleanAttribute });
 
   readonly photoUrl = input<string>();
 

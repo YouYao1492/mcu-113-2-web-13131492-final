@@ -3,7 +3,6 @@ import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../models/product';
 import { CartService } from '../services/cart.service';
-import { ProductService } from './../services/product.service';
 
 @Component({
   selector: 'app-product-detail-page',

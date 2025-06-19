@@ -13,6 +13,10 @@
     &.button {
       display: flex;
       justify-content: space-between;
+
+      .discountedName {
+        color: red;
+      }
     }
 
     &.button {

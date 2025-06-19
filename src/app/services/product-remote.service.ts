@@ -17,12 +17,9 @@ export class ProductRemoteService extends ProductService {
     if (name) queryString = { ...queryString, name };
     const params = new HttpParams({ fromObject: queryString });
 
-    return this.httpClient.get<{ data: Product[]; items: number }>(this.url, { params }).pipe(
-      map(({ data, items: count }) => ({
-        data: data.map((product) => ({ ...product, price: product.isDiscount ? product.price * 0.9 : product.price })),
-        count,
-      }))
-    );
+    return this.httpClient
+      .get<{ data: Product[]; items: number }>(this.url, { params })
+      .pipe(map(({ data, items: count }) => ({ data, count })));
   }
 
   override getById(productId: string): Observable<Product> {
